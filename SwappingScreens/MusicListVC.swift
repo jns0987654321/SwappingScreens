@@ -26,6 +26,25 @@ class MusicListVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    // first segue performed via code
+    @IBAction func load3rdScreenPressed(_ sender: Any) {
+        let songTitle = "Just Another Day"
+        performSegue(withIdentifier: "PlaySongVC", sender: songTitle)
+    }
+    
+    // second prepare segue called before view did load of destination VC
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // make sure we are moving to correct VC
+        if let destination = segue.destination as? PlaySongVC {
+            
+            // set data on new VC
+            if let song = sender as? String {
+                destination.selectedSong = song
+            }
+            
+        }
+    }
     /*
     // MARK: - Navigation
 
